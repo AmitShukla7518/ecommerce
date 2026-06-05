@@ -41,7 +41,7 @@ exports.me = async (req, res) => {
 exports.forgotPassword = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return res.json({ message: "If an account exists for this email, a password reset link has been sent." });
+    return res.json({ message: "User Not Found !!" });
   }
 
   const resetToken = user.createPasswordResetToken();
@@ -67,7 +67,7 @@ exports.forgotPassword = async (req, res, next) => {
       `,
     });
 
-    res.json({ message: "If an account exists for this email, a password reset link has been sent." });
+    res.json({ message: "Password reset link has been sent on Email." });
   } catch (error) {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
